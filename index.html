@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang='en' ng-app='app'>
+<head>
+  <meta charset='UTF-8'>
+  <title>NOTES</title>
+
+  <!-- This is neccesary to bootstrap responsive -->
+  <meta name = 'viewport' content = 'width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'>
+
+  <!-- bootstrap 3.3.6 ccs-->
+  <link rel = 'stylesheet' href = 'content/bootstrap.min.css'>
+  <!-- font-awesome-4.7.0-->
+  <link rel = 'stylesheet' href = 'content/font-awesome/css/font-awesome.min.css'>
+  <!-- styles generated-->
+  <link rel = 'stylesheet' href = 'content/stylesMain.css'>
+
+</head>
+
+<body>
+
+  <header>
+    <nav class = 'navbar navbar-inverse navbar-static-top' role = 'navigation'>
+      <div class = 'container-fluid'>
+        <div class = 'navbar-header'>
+          <a href = '' class='navbar-brand text-uppercase'>NOTES APP</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class = 'container-fluid'  ng-controller = 'controlController as ctrl'>
+    <section class = 'main row'>
+      <div class = 'col-md-3'></div>
+      <div class = 'col-md-6'>
+        <form name="myForm" novalidate>
+          <p><h3>NOTES</h3></p>
+          <p>Insert note, It will be saved without format</p>
+          <textarea rows = '3' ng-model = 'ctrl.note.text' name="textNote" placeholder = 'Write Here...' required>
+          </textarea>
+          <span class = 'error-span' ng-show = 'myForm.textNote.$invalid && ctrl.errorNote'>
+            <span ng-show = 'myForm.textNote.$error.required'>Empty note is not allowed</span>
+          </span>
+          <div>
+            <button class = 'btn btn-primary' ng-click = 'ctrl.addNote()'>ADD</button>
+          </div>
+        </form>
+
+        <p><h4>Filter</h4></p>
+        <p>Type words separated by spaces that the note must contain.</p>
+        <input type = 'text' ng-change = 'ctrl.filterTableNotes()' ng-model = 'ctrl.textReference'>
+
+        <hr>
+
+        <table class = 'table text-center' id = 'tableStyle'>
+          <tr >
+            <div ng-show = 'ctrl.notesTable.length <= 0' class = 'no-notes'>NO NOTES</div>
+          </tr>
+          <tr ng-repeat = 'note in ctrl.notesTable'>
+            <td>{{ note.text }}</td>
+            <td ng-click = 'ctrl.removeNote(note.id)'>
+              <i class="fa fa-trash fa-lg" title = 'Delete this note'></i>
+            </td>
+          </tr>
+        </table>
+
+      </div>
+      <div class = 'col-md-3'></div>
+    </section>
+
+  </div>
+
+  <!-- angularjs 1.4.8, bootstrap native 3 -->
+  <script src = 'scripts/bootstrap-native.min.js'></script>
+  <script src = 'scripts/angularjs.min.js'></script>
+
+  <script src = 'app/app.module.js'></script>
+  <script src = 'app/server.factory.js'></script>
+  <script src = 'app/control.controller.js'></script>
+  
+</body>
+</html>

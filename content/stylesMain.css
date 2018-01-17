@@ -1,0 +1,21 @@
+textarea {
+  resize: none;
+  width: 100%;
+}
+
+input {
+  width: 100%;
+}
+
+.error-span {
+  color: red;
+}
+
+.no-notes {
+  text-align: center;
+  color: gray;
+}
+
+.fa:hover {
+  cursor: pointer;
+}
